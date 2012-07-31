@@ -12,6 +12,11 @@ multi sub infix:<∉>(   Any $a, KeyBag $x --> Bool) is export { !$x.exists($a) 
 multi sub infix:<∋>(KeyBag $x,    Any $a --> Bool) is export {  $x.exists($a) }
 multi sub infix:<∌>(KeyBag $x,    Any $a --> Bool) is export { !$x.exists($a) }
 
+multi sub infix:<⊂>(KeyBag $x, KeyBag $y --> Bool) is export {  $y.contains($x) }
+multi sub infix:<⊃>(KeyBag $x, KeyBag $y --> Bool) is export {  $x.contains($y) }
+multi sub infix:<⊄>(KeyBag $x, KeyBag $y --> Bool) is export { !$y.contains($x) }
+multi sub infix:<⊅>(KeyBag $x, KeyBag $y --> Bool) is export { !$x.contains($y) }
+
 sub keybag(*@a) is export {
     KeyBag::Spiffy.new(|@a);
 }

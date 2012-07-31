@@ -23,6 +23,24 @@ plan *;
 
 }
 
+{
+    my ($x,$y);
+    lives_ok { $x = keybag({a => 1})         },  "inst x";
+    lives_ok { $y = keybag({a => 1, b => 1}) },  "inst y";
+
+     ok $x ⊂ $y, " is-subset-of   ⊂";
+    nok $y ⊂ $x, " is-subset-of   ⊂";
+
+     ok $y ⊃ $x, " is-superset-of ⊃";
+    nok $x ⊃ $y, " is-superset-of ⊃";
+
+     ok $y ⊄ $x, "!is-subset-of   ⊄";
+    nok $x ⊄ $y, "!is-subset-of   ⊄";
+
+     ok $x ⊅ $y, "!is-superset-of ⊅";
+    nok $y ⊅ $x, "!is-superset-of ⊅";
+
+}
 
 
 
