@@ -36,11 +36,25 @@ plan *;
     nok $x ⊄ $y, "!is-subset-of   :  x ⊄ y  => F";
     nok $y ⊅ $x, "!is-superset-of :  y ⊅ x  => F";
 
+    nok $x ⊂ $x, " is-subset-of   :  x ⊂ x  => F";
+    nok $x ⊃ $x, " is-superset-of :  x ⊃ x  => F";
      ok $x ⊄ $x, "!is-subset-of   :  x ⊄ x  => T";
      ok $x ⊅ $x, "!is-superset-of :  x ⊅ x  => T";
 
-    nok $x ⊂ $x, " is-subset-of   :  x ⊂ x  => F";
-    nok $x ⊃ $x, " is-superset-of :  x ⊃ x  => F";
+     ok $x ⊆ $y, " is-subset-of-or-equal-to   : x ⊆ y  => T";
+     ok $y ⊇ $x, " is-superset-of-or-equal-to : x ⊇ x  => T";
+     ok $y ⊈ $x, "!is-subset-or-equal-to      : y ⊈ x  => T";
+     ok $x ⊉ $y, "!is-superset-of-or-equal-to : x ⊉ y  => T";
+
+    nok $y ⊆ $x, " is-subset-of-or-equal-to   : y ⊆ x  => F";
+    nok $x ⊇ $y, " is-superset-of-or-equal-to : x ⊇ y  => F";
+    nok $x ⊈ $y, "!is-subset-or-equal-to      : x ⊈ y  => F";
+    nok $y ⊉ $x, "!is-superset-of-or-equal-to : y ⊉ x  => F";
+
+     ok $x ⊆ $x, " is-subset-of-or-equal-to   : x ⊆ x  => T";
+     ok $x ⊇ $x, " is-superset-of-or-equal-to : x ⊇ x  => T";
+    nok $x ⊈ $x, "!is-subset-or-equal-to      : x ⊈ x  => F";
+    nok $x ⊉ $x, "!is-superset-of-or-equal-to : x ⊉ x  => F";
 
 }
 
@@ -61,7 +75,7 @@ plan *;
 2285 : 8837 = ⊅ => !is-superset-of
 2286 : 8838 = ⊆ =>  is-subset-of-or-equal-to
 2287 : 8839 = ⊇ =>  is-superset-of-or-equal-to
-2288 : 8840 = ⊈ => !is-subset-or-equal
-2289 : 8841 = ⊉ => !is-superset-or-equal
+2288 : 8840 = ⊈ => !is-subset-of-or-equal-to
+2289 : 8841 = ⊉ => !is-superset-of-or-equal-to
 228E : 8846 = ⊎ =>  multiset-sum
 
