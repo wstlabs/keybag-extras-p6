@@ -80,6 +80,38 @@ plan *;
     ok ($E ∖ $x) eqv $E, "E ∖ x";
 }
 
+
+# in-place operators
+{
+    my ($x,$y,$E);
+    my %x is ro = {a => 1, b => 1, c => 2, d => 1}; 
+    my %y is ro = {        b => 2, c => 1, e => 1 };
+    my %z is ro = {a => 1,         c => 1, d => 1 }; # x - y
+    my %w is ro = {        b => 1,         e => 1 }; # y - x
+
+    {
+        my $x = keybag(%x);
+        my $y = keybag(%y);
+        my $z = keybag(%z);
+        my $E = keybag({});
+        ok $x ∖= $y eqv $z, "x ∖= y (LHS)";
+        ok $x       eqv $z, "x ∖= y (object)";
+        ok $y       eqv keybag(%y), "y unmolested";
+    }
+
+
+    {
+        my $x = keybag(%x);
+        my $y = keybag(%y);
+        my $u = keybag(%x);
+        my $E = keybag({});
+        ok $x ∖= $E eqv $u, "x ∖= x (LHS)";
+        ok $x       eqv $u, "x ∖= x (object)";
+        ok $E       eqv keybag({}), "E unmolested";
+    }
+
+}
+
 {
     my %x is ro = { a => 3,   b => 2,   c => 1 };
     my %w is ro = { a => 1/2, b => 1/3, d => 1/7 };
