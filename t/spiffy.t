@@ -95,9 +95,12 @@ plan *;
     is $E.dot({}), 0,    ".dot -     empty set,      zero measure";
     is $x.dot(),   Nil,  ".dot - non-empty set, null arg";
     is $E.dot(),   Nil,  ".dot -     empty set, null arg";
+    is $x.dot(%w), $r,   ".dot - simple product (via method)";
+    is $x ∙ %w,    $r,   "x ∙ w";
 }
 
 =begin END
+
 
 
 2208 : 8712 = ∈ =>  contains-as-member (R)

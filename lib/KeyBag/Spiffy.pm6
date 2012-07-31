@@ -29,12 +29,15 @@ multi sub infix:<∪> (KeyBag $x, KeyBag $y --> KeyBag) is export {  $x.union($y
 multi sub infix:<∖> (KeyBag $x, KeyBag $y --> KeyBag) is export {  $x.minus($y) }
 
 multi sub infix:<eqv> (KeyBag $x, KeyBag $y --> Bool) is export {  $x.equiv($y) }
+multi sub infix:<∙>   (KeyBag $x, Any $y)             is export {  $x.dot($y) }
 
 sub keybag(*@a) is export {
     KeyBag::Spiffy.new(|@a);
 }
 
 =begin END
+
+multi sub infix:<> 
 
 #
 # reference list of set ops, derived largely from
@@ -60,6 +63,7 @@ sub keybag(*@a) is export {
 220B : 8715 = ∋ =>  contains-as-member (L)
 220C : 8716 = ∌ => !contains-as-member (L)
 2216 : 8726 = ∖ =>  set-diff
+2219 : 8729 = ∙ => interpunct
 2229 : 8745 = ∩ =>  set-inter
 222A : 8746 = ∪ =>  set-union
 2282 : 8834 = ⊂ =>  is-subset-of
