@@ -80,6 +80,14 @@ plan *;
     ok ($E ∖ $x) eqv $E, "E ∖ x";
 }
 
+{
+    my %x is ro = { a => 3,   b => 2,   c => 1 };
+    my %w is ro = { a => 1/2, b => 1/3, d => 1/7 };
+    my $x = keybag(%x);
+    my $r = 13/6;
+
+    is $x.dot(%w), $r, ".dot";
+}
 
 =begin END
 

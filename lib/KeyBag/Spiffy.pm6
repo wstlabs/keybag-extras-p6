@@ -1,11 +1,13 @@
 use v6;
 use KeyBag::Dist;
 use KeyBag::Rel;
+use KeyBag::Dot;
 
 class KeyBag::Spiffy
 is    KeyBag
 does  KeyBag::Dist
-does  KeyBag::Rel {};
+does  KeyBag::Rel
+does  KeyBag::Dot {};
 
 multi sub infix:<∈>(   Any $a, KeyBag $x --> Bool) is export {  $x.exists($a) }
 multi sub infix:<∉>(   Any $a, KeyBag $x --> Bool) is export { !$x.exists($a) }
