@@ -9,17 +9,15 @@ plan *;
     my $x;
     lives_ok { $x = keybag({a => 1}) },  "inst";
 
-     ok  'a' ∈  $x  , " contains-as-member ∈";
-    nok  'b' ∈  $x  , " contains-as-member ∈";
+     ok  'a' ∈  $x  , " contains-as-member :  a ∈ x  => T";
+     ok  'b' ∉  $x  , "!contains-as-member :  b ∉ x  => T ";
+     ok  $x  ∋  'a' , " contains-as-member :  x ∋ a  => T";
+     ok  $x  ∌  'b' , "!contains-as-member :  x ∌ b  => T";
 
-     ok  'b' ∉  $x  , "!contains-as-member ∉";
-    nok  'a' ∉  $x  , "!contains-as-member ∉";
-
-     ok  $x  ∋  'a' , " contains-as-member ∋";
-    nok  $x  ∋  'b' , " contains-as-member ∋";
-
-     ok  $x  ∌  'b' , "!contains-as-member ∌";
-    nok  $x  ∌  'a' , "!contains-as-member ∌";
+    nok  'b' ∈  $x  , " contains-as-member :  b ∈ x  => F";
+    nok  'a' ∉  $x  , "!contains-as-member :  a ∉ x  => F";
+    nok  $x  ∋  'b' , " contains-as-member :  x ∋ b  => F";
+    nok  $x  ∌  'a' , "!contains-as-member :  x ∌ a  => F";
 
 }
 
@@ -28,17 +26,21 @@ plan *;
     lives_ok { $x = keybag({a => 1})         },  "inst x";
     lives_ok { $y = keybag({a => 1, b => 1}) },  "inst y";
 
-     ok $x ⊂ $y, " is-subset-of   ⊂";
-    nok $y ⊂ $x, " is-subset-of   ⊂";
+     ok $x ⊂ $y, " is-subset-of   :  x ⊂ y  => T";
+     ok $y ⊃ $x, " is-superset-of :  y ⊃ x  => T";
+     ok $y ⊄ $x, "!is-subset-of   :  y ⊄ x  => T";
+     ok $x ⊅ $y, "!is-superset-of :  x ⊅ y  => T";
 
-     ok $y ⊃ $x, " is-superset-of ⊃";
-    nok $x ⊃ $y, " is-superset-of ⊃";
+    nok $y ⊂ $x, " is-subset-of   :  y ⊂ x  => F";
+    nok $x ⊃ $y, " is-superset-of :  x ⊃ y  => F";
+    nok $x ⊄ $y, "!is-subset-of   :  x ⊄ y  => F";
+    nok $y ⊅ $x, "!is-superset-of :  y ⊅ x  => F";
 
-     ok $y ⊄ $x, "!is-subset-of   ⊄";
-    nok $x ⊄ $y, "!is-subset-of   ⊄";
+     ok $x ⊄ $x, "!is-subset-of   :  x ⊄ x  => T";
+     ok $x ⊅ $x, "!is-superset-of :  x ⊅ x  => T";
 
-     ok $x ⊅ $y, "!is-superset-of ⊅";
-    nok $y ⊅ $x, "!is-superset-of ⊅";
+    nok $x ⊂ $x, " is-subset-of   :  x ⊂ x  => F";
+    nok $x ⊃ $x, " is-superset-of :  x ⊃ x  => F";
 
 }
 
