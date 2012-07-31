@@ -7,10 +7,10 @@ is    KeyBag
 does  KeyBag::Dist
 does  KeyBag::Rel {};
 
-multi sub infix:<∈>(Any $a, KeyBag $x --> Bool) is export {  $x.exists($a) }
-multi sub infix:<∉>(Any $a, KeyBag $x --> Bool) is export { !$x.exists($a) }
-multi sub infix:<∋>(KeyBag $x, Any $a --> Bool) is export {  $x.exists($a) }
-multi sub infix:<∌>(KeyBag $x, Any $a --> Bool) is export { !$x.exists($a) }
+multi sub infix:<∈>(   Any $a, KeyBag $x --> Bool) is export {  $x.exists($a) }
+multi sub infix:<∉>(   Any $a, KeyBag $x --> Bool) is export { !$x.exists($a) }
+multi sub infix:<∋>(KeyBag $x,    Any $a --> Bool) is export {  $x.exists($a) }
+multi sub infix:<∌>(KeyBag $x,    Any $a --> Bool) is export { !$x.exists($a) }
 
 sub keybag(*@a) is export {
     KeyBag::Spiffy.new(|@a);
