@@ -58,8 +58,10 @@ plan *;
 
 {
     my ($x,$y,$z,$E);
-    lives_ok { $x = keybag({a => 1, b => 1}) },  "inst x";
-    lives_ok { $y = keybag({b => 1, c => 1}) },  "inst y";
+    my %x is ro = { a => 1, b => 1 };
+    my %y is ro = {         b => 1, c => 1 }; 
+    lives_ok { $x = keybag(%x) },  "inst x";
+    lives_ok { $y = keybag(%y) },  "inst y";
     lives_ok { $z = keybag({d => 1}) },          "inst z";
     lives_ok { $E = keybag({}) },                "inst e";
     ok ($x ∩ $y) eqv keybag({ b => 1 }), "x ∩ y";
@@ -72,6 +74,8 @@ plan *;
     ok ($E ∪ $x) eqv $x, "E ∪ x"; 
     ok ($x ∖ $y) eqv keybag({ a => 1 }), "x ∖ y";
     ok ($y ∖ $x) eqv keybag({ c => 1 }), "y ∖ x";
+    ok ($x ∖ %y) eqv keybag({ a => 1 }), "x ∖ %y"; # alt sig
+    ok ($y ∖ %x) eqv keybag({ c => 1 }), "y ∖ %x"; # alg sig
     ok ($x ∖ $x) eqv $E, "x ∖ x";
     ok ($x ∖ $E) eqv $x, "x ∖ E";
     ok ($E ∖ $E) eqv $E, "E ∖ E";
@@ -95,7 +99,9 @@ plan *;
         ok ($y ⊎ $x)  eqv $z, "y ⊎ x";
         ok ($x ⊎ $E)  eqv $x, "x ⊎ E";
         ok ($E ⊎ $x)  eqv $x, "E ⊎ x";
+        ok ($x ⊎ %y)  eqv $z, "x ⊎ %y"; # alt sig
     }
+
 }
 
 # in-place operators

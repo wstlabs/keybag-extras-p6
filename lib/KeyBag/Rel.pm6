@@ -1,20 +1,20 @@
 use v6;
 role KeyBag::Rel  {
 
-    method contains-or-equals (KeyBag $b --> Bool)  {
+    multi method contains-or-equals (KeyBag $b --> Bool)  {
         for $b.keys -> $k {
             return False unless self.exists($k)
         }
         return True
     }
 
-    method contains (KeyBag $b --> Bool)  {
+    multi method contains (KeyBag $b --> Bool)  {
         self.elems > $b.elems ?? 
             self.contains-or-equals($b) 
         !! False 
     }
 
-    method inter (KeyBag $b --> KeyBag)  {
+    multi method inter (KeyBag $b --> KeyBag)  {
         self.new(
             hash map -> $k {
                 $b.exists($k) ??
@@ -24,7 +24,7 @@ role KeyBag::Rel  {
         )
     }
 
-    method union (KeyBag $b --> KeyBag)  {
+    multi method union (KeyBag $b --> KeyBag)  {
         self.new(
             hash map -> $k {
                 $k => self.at_key($k) max $b.at_key($k)
@@ -32,7 +32,7 @@ role KeyBag::Rel  {
         )
     }
 
-    method minus (KeyBag $b --> KeyBag)  {
+    multi method minus (KeyBag $b --> KeyBag)  {
         self.new(
             hash map -> $k {
                 $b.at_key($k) ?? 
@@ -44,7 +44,7 @@ role KeyBag::Rel  {
         )
     }
   
-    method minus-in-place (KeyBag $b --> KeyBag)  {
+    multi method minus-in-place (KeyBag $b --> KeyBag)  {
         for self.keys -> $k {
             if ($b.exists($k))  {
                 self.at_key($k) = 
@@ -55,7 +55,7 @@ role KeyBag::Rel  {
         return self
     }
 
-    method sum (KeyBag $b --> KeyBag)  {
+    multi method sum (KeyBag $b --> KeyBag)  {
         self.new(
             hash map -> $k {
                 $k => self.at_key($k) + $b.at_key($k)
@@ -63,15 +63,20 @@ role KeyBag::Rel  {
         )
     }
 
-    method sum-in-place (KeyBag $b --> KeyBag)  {
+    multi method sum-in-place (KeyBag $b --> KeyBag)  {
         for $b.keys -> $k {
             self.at_key($k) += $b.at_key($k) 
         }
         return self
     }
 
+    # alternate signature support for selected ops
+    multi method minus          (Any $x)  { self.minus(          self.new($x) ) }
+    multi method minus-in-place (Any $x)  { self.minus-in-place( self.new($x) ) }
+    multi method sum            (Any $x)  { self.sum(            self.new($x) ) }
+    multi method sum-in-place   (Any $x)  { self.sum-in-place(   self.new($x) ) }
 
-    method equiv (KeyBag $b --> Bool)  {
+    multi method equiv (KeyBag $b --> Bool)  {
         self.contains-or-equals($b)    &&
           $b.contains-or-equals(self)
     }

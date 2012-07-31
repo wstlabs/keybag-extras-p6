@@ -34,15 +34,15 @@ multi sub infix:<⊉>(KeyBag $x, KeyBag $y --> Bool) is export { !$x.contains-or
 
 multi sub infix:<∩> (KeyBag $x, KeyBag $y --> KeyBag) is export {  $x.inter($y) }
 multi sub infix:<∪> (KeyBag $x, KeyBag $y --> KeyBag) is export {  $x.union($y) }
-multi sub infix:<∖> (KeyBag $x, KeyBag $y --> KeyBag) is export {  $x.minus($y) }
-multi sub infix:<⊎> (KeyBag $x, KeyBag $y --> KeyBag) is export {  $x.sum($y) }
+multi sub infix:<∖> (KeyBag $x,    Any $y --> KeyBag) is export {  $x.minus($y) }
+multi sub infix:<⊎> (KeyBag $x,    Any $y --> KeyBag) is export {  $x.sum($y) }
 
 multi sub infix:<eqv> (KeyBag $x, KeyBag $y --> Bool) is export {  $x.equiv($y) }
 multi sub infix:<∙>   (KeyBag $x, Any $y)             is export {  $x.dot($y) }
 
 # finally, some ugly, but servicable in-place operators
-multi sub infix:<∖=> (KeyBag $x, KeyBag $y --> KeyBag) is export {  $x.minus-in-place($y) }
-multi sub infix:<⊎=> (KeyBag $x, KeyBag $y --> KeyBag) is export {  $x.sum-in-place($y) }
+multi sub infix:<∖=> (KeyBag $x, Any $y --> KeyBag) is export {  $x.minus-in-place($y) }
+multi sub infix:<⊎=> (KeyBag $x, Any $y --> KeyBag) is export {  $x.sum-in-place($y) }
 
 sub keybag(*@a) is export {
     KeyBag::Deco.new(|@a);
