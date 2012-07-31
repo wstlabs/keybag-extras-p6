@@ -165,14 +165,19 @@ plan *;
 
 =begin END
 
-    my %w is ro = {        b => 1,         e => 1 };         # y - x (not used)
-
+#
+# for the sake of reference, here are unicode symbols we'll be using,
+# along with "standard" methods or operatios they correspond to. 
+#
+# todo:  provide citations for these
+#
 
 2208 : 8712 = ∈ =>  contains-as-member (R)
 2209 : 8713 = ∉ => !contains-as-member (R)
 220B : 8715 = ∋ =>  contains-as-member (L)
 220C : 8716 = ∌ => !contains-as-member (L)
 2216 : 8726 = ∖ =>  set-diff
+2219 : 8729 = ∙ =>  interpunct
 2229 : 8745 = ∩ =>  set-inter
 222A : 8746 = ∪ =>  set-union
 2282 : 8834 = ⊂ =>  is-subset-of
