@@ -44,6 +44,33 @@ role KeyBag::Rel  {
         )
     }
   
+    method minus-in-place (KeyBag $b --> KeyBag)  {
+        for self.keys -> $k {
+            if ($b.exists($k))  {
+                self.at_key($k) = 
+                    self.at_key($k) >= $b.at_key($k) ?? 
+                    self.at_key($k) -  $b.at_key($k) !!  0
+            }
+        }
+        return self
+    }
+
+    method sum (KeyBag $b --> KeyBag)  {
+        self.new(
+            hash map -> $k {
+                $k => self.at_key($k) + $b.at_key($k)
+            }, Set.new(self.keys,$b.keys)
+        )
+    }
+
+    method sum-in-place (KeyBag $b --> KeyBag)  {
+        for $b.keys -> $k {
+            self.at_key($k) += $b.at_key($k) 
+        }
+        return self
+    }
+
+
     method equiv (KeyBag $b --> Bool)  {
         self.contains-or-equals($b)    &&
           $b.contains-or-equals(self)

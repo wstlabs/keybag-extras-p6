@@ -55,7 +55,6 @@ plan *;
      ok $x ⊇ $x, " is-superset-of-or-equal-to : x ⊇ x  => T";
     nok $x ⊈ $x, "!is-subset-or-equal-to      : x ⊈ x  => F";
     nok $x ⊉ $x, "!is-superset-of-or-equal-to : x ⊉ x  => F";
-
 }
 
 {
@@ -80,14 +79,33 @@ plan *;
     ok ($E ∖ $x) eqv $E, "E ∖ x";
 }
 
+# multi-set sum
+{
+    my %x is ro = {a => 1, b => 1,        }; 
+    my %y is ro = {        b => 2, c => 4 };
+    my %z is ro = {a => 1, b => 3, c => 4 };
+    my $E = keybag({});
+
+    {
+        my $x = keybag(%x);
+        my $y = keybag(%y);
+        my $z = keybag(%z);
+        ok $x.sum($y) eqv $z, "x.sum(y)";
+        ok $y.sum($x) eqv $z, "y.sum(x)";
+        ok ($x ⊎ $y)  eqv $z, "x ⊎ y";
+        ok ($y ⊎ $x)  eqv $z, "y ⊎ x";
+        ok ($x ⊎ $E)  eqv $x, "x ⊎ E";
+        ok ($E ⊎ $x)  eqv $x, "E ⊎ x";
+    }
+}
 
 # in-place operators
 {
     my ($x,$y,$E);
-    my %x is ro = {a => 1, b => 1, c => 2, d => 1}; 
+    my %x is ro = {a => 1, b => 1, c => 2, d => 1 }; 
     my %y is ro = {        b => 2, c => 1, e => 1 };
-    my %z is ro = {a => 1,         c => 1, d => 1 }; # x - y
-    my %w is ro = {        b => 1,         e => 1 }; # y - x
+    my %z is ro = {a => 1,         c => 1, d => 1 };         # x - y
+    my %w is ro = {a => 1, b => 3, c => 3, d => 1, e => 1 }; # x + y
 
     {
         my $x = keybag(%x);
@@ -110,6 +128,15 @@ plan *;
         ok $E       eqv keybag({}), "E unmolested";
     }
 
+    {
+        my $x = keybag(%x);
+        my $y = keybag(%y);
+        my $w = keybag(%w);
+        my $E = keybag({});
+        ok $x ⊎= $y eqv $w, "x ⊎= y (LHS)";
+        ok $x       eqv $w, "x ⊎= y (object)";
+        ok $y       eqv keybag(%y), "y unmolested";
+    }
 }
 
 {
@@ -133,6 +160,7 @@ plan *;
 
 =begin END
 
+    my %w is ro = {        b => 1,         e => 1 };         # y - x (not used)
 
 
 2208 : 8712 = ∈ =>  contains-as-member (R)
