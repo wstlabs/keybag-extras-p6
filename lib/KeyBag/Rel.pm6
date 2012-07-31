@@ -1,11 +1,13 @@
 use v6;
 role KeyBag::Rel  {
+
     method contains-or-equals (KeyBag $b --> Bool)  {
         for $b.keys -> $k {
             return False unless self.exists($k)
         }
         return True
     }
+
     method contains (KeyBag $b --> Bool)  {
         self.elems > $b.elems ?? 
             self.contains-or-equals($b) 
