@@ -72,6 +72,12 @@ plan *;
     ok ($y ∪ $x) eqv keybag({ a => 1, b => 1, c => 1}), "y ∪ x"; 
     ok ($x ∪ $E) eqv $x, "x ∪ E"; 
     ok ($E ∪ $x) eqv $x, "E ∪ x"; 
+    ok ($x ∖ $y) eqv keybag({ a => 1 }), "x ∖ y";
+    ok ($y ∖ $x) eqv keybag({ c => 1 }), "y ∖ x";
+    ok ($x ∖ $x) eqv $E, "x ∖ x";
+    ok ($x ∖ $E) eqv $x, "x ∖ E";
+    ok ($E ∖ $E) eqv $E, "E ∖ E";
+    ok ($E ∖ $x) eqv $E, "E ∖ x";
 }
 
 

@@ -31,6 +31,18 @@ role KeyBag::Rel  {
             }, Set.new(self.keys,$b.keys)
         )
     }
+
+    method minus (KeyBag $b --> KeyBag)  {
+        self.new(
+            hash map -> $k {
+                $b.at_key($k) ?? 
+                    self.at_key($k) >= $b.at_key($k) ??
+                        ( $k => self.at_key($k) - $b.at_key($k) )
+                    !! ()
+                !!  ( $k => self.at_key($k) )
+            }, self.keys 
+        )
+    }
   
     method equiv (KeyBag $b --> Bool)  {
         self.contains-or-equals($b)    &&
