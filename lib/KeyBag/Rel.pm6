@@ -13,6 +13,30 @@ role KeyBag::Rel  {
             self.contains-or-equals($b) 
         !! False 
     }
+
+    method inter (KeyBag $b --> KeyBag)  {
+        self.new(
+            hash map -> $k {
+                $b.exists($k) ??
+                    $k => self.at_key($k) min $b.at_key($k)
+                !! ()
+            }, self.keys
+        )
+    }
+
+    method union (KeyBag $b --> KeyBag)  {
+        self.new(
+            hash map -> $k {
+                $k => self.at_key($k) max $b.at_key($k)
+            }, Set.new(self.keys,$b.keys)
+        )
+    }
+  
+    method equiv (KeyBag $b --> Bool)  {
+        self.contains-or-equals($b)    &&
+          $b.contains-or-equals(self)
+    }
+  
 }
 
 

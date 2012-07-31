@@ -22,6 +22,11 @@ multi sub infix:<⊇>(KeyBag $x, KeyBag $y --> Bool) is export {  $x.contains-or
 multi sub infix:<⊈>(KeyBag $x, KeyBag $y --> Bool) is export { !$y.contains-or-equals($x) }
 multi sub infix:<⊉>(KeyBag $x, KeyBag $y --> Bool) is export { !$x.contains-or-equals($y) }
 
+multi sub infix:<∩> (KeyBag $x, KeyBag $y --> KeyBag) is export {  $x.inter($y) }
+multi sub infix:<∪> (KeyBag $x, KeyBag $y --> KeyBag) is export {  $x.union($y) }
+
+multi sub infix:<eqv> (KeyBag $x, KeyBag $y --> Bool) is export {  $x.equiv($y) }
+
 sub keybag(*@a) is export {
     KeyBag::Spiffy.new(|@a);
 }

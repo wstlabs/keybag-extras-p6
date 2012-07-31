@@ -58,9 +58,25 @@ plan *;
 
 }
 
+{
+    my ($x,$y,$z,$E);
+    lives_ok { $x = keybag({a => 1, b => 1}) },  "inst x";
+    lives_ok { $y = keybag({b => 1, c => 1}) },  "inst y";
+    lives_ok { $z = keybag({d => 1}) },          "inst z";
+    lives_ok { $E = keybag({}) },                "inst e";
+    ok ($x ∩ $y) eqv keybag({ b => 1 }), "x ∩ y";
+    ok ($x ∩ $z) eqv $E,                 "x ∩ z";
+    ok ($x ∩ $x) eqv $x,                 "x ∩ x";
+    ok ($x ∩ $E) eqv $E,                 "x ∩ E";
+    ok ($x ∪ $y) eqv keybag({ a => 1, b => 1, c => 1}), "x ∪ y"; 
+    ok ($y ∪ $x) eqv keybag({ a => 1, b => 1, c => 1}), "y ∪ x"; 
+    ok ($x ∪ $E) eqv $x, "x ∪ E"; 
+    ok ($E ∪ $x) eqv $x, "E ∪ x"; 
+}
 
 
 =begin END
+
 
 2208 : 8712 = ∈ =>  contains-as-member (R)
 2209 : 8713 = ∉ => !contains-as-member (R)
