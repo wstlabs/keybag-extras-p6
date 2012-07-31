@@ -83,10 +83,18 @@ plan *;
 {
     my %x is ro = { a => 3,   b => 2,   c => 1 };
     my %w is ro = { a => 1/2, b => 1/3, d => 1/7 };
+    my %v is ro = { foo => 1/5 };
     my $x = keybag(%x);
+    my $E = keybag({});
     my $r = 13/6;
 
-    is $x.dot(%w), $r, ".dot";
+    is $x.dot(%w), $r,   ".dot - simple product (via method)";
+    is $x.dot(%v), 0,    ".dot - non-empty set, disjoint measure";
+    is $E.dot(%w), 0,    ".dot -     empty set, non-empty measure";
+    is $x.dot({}), 0,    ".dot - non-empty set,      zero measure";
+    is $E.dot({}), 0,    ".dot -     empty set,      zero measure";
+    is $x.dot(),   Nil,  ".dot - non-empty set, null arg";
+    is $E.dot(),   Nil,  ".dot -     empty set, null arg";
 }
 
 =begin END

@@ -1,6 +1,7 @@
 use v6;
 role KeyBag::Dot  {
 
+    multi method dot ()  { Nil }
     multi method dot (%u)  {
         return [+] map -> $k, $v {
             %u{$k} ?? $v * %u{$k} !! () 
