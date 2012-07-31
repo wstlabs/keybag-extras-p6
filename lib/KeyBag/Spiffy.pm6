@@ -1,11 +1,22 @@
 use v6;
-role KeyBag::Rel  {
+use KeyBag::Dist;
+use KeyBag::Rel;
+
+class KeyBag::Spiffy
+is    KeyBag
+does  KeyBag::Dist
+does  KeyBag::Rel {};
+
+multi sub infix:<∈>(Any $a, KeyBag $x --> Bool) is export {  $x.exists($a) }
+multi sub infix:<∉>(Any $a, KeyBag $x --> Bool) is export { !$x.exists($a) }
+multi sub infix:<∋>(KeyBag $x, Any $a --> Bool) is export {  $x.exists($a) }
+multi sub infix:<∌>(KeyBag $x, Any $a --> Bool) is export { !$x.exists($a) }
+
+sub keybag(*@a) is export {
+    KeyBag::Spiffy.new(|@a);
 }
 
-
 =begin END
-
-multi sub infix:<∈>(Any $a, KeyBag $x --> Bool) is export { $x.exists($a) }
 
 #
 # reference list of set ops, derived largely from
@@ -65,5 +76,6 @@ multi sub infix:<≼>(Baggy $a, Baggy $b --> Bool) { so all $a.keys.map({ $a{$_}
 
 proto sub infix:<≽>($, $ --> Bool) is equiv(&infix:<==>) {*}
 multi sub infix:<≽>(Baggy $a, Baggy $b --> Bool) { so all $b.keys.map({ $b{$_} <= $a{$_} }) }
+
 
 
