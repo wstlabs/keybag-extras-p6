@@ -1,8 +1,8 @@
 use v6;
 BEGIN { @*INC.unshift: './lib' }
-use KeyBag::Spiffy;
+use KeyBag::Deco;
 
-my $b = KeyBag::Spiffy.new({ a => 2, b => 3, c => -1 });
+my $b = KeyBag::Deco.new({ a => 2, b => 3, c => -1 });
 
 say $b;
 $b<x> = 5;

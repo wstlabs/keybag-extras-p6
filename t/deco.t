@@ -1,8 +1,7 @@
 use v6;
 BEGIN { @*INC.unshift: './lib'; }
 use Test;
-use KeyBag::Spiffy; 
-# use KeyBag::Rel;
+use KeyBag::Deco; 
 plan *;
 
 {

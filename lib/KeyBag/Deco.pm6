@@ -3,7 +3,15 @@ use KeyBag::Dist;
 use KeyBag::Rel;
 use KeyBag::Dot;
 
-class KeyBag::Spiffy
+#
+# a "decorated" KeyBag extension providing some functionality that is
+# currently (2012.07) either un- or partially implemented in rakudo / niecza.
+#
+# note that our interface ends up being somewhat different, and in any
+# case will probably break once official implementations become available. 
+# but by then it will hopefully be obsolete, also.
+#
+class KeyBag::Deco
 is    KeyBag
 does  KeyBag::Dist
 does  KeyBag::Rel
@@ -37,7 +45,7 @@ multi sub infix:<∖=> (KeyBag $x, KeyBag $y --> KeyBag) is export {  $x.minus-i
 multi sub infix:<⊎=> (KeyBag $x, KeyBag $y --> KeyBag) is export {  $x.sum-in-place($y) }
 
 sub keybag(*@a) is export {
-    KeyBag::Spiffy.new(|@a);
+    KeyBag::Deco.new(|@a);
 }
 
 =begin END
