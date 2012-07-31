@@ -8,7 +8,6 @@ plan *;
 {
     my $x;
     lives_ok { $x = keybag({a => 1}) },  "inst";
-    say "x => $x = ", $x;
 
      ok  'a' ∈  $x  , " contains-as-member ∈";
     nok  'b' ∈  $x  , " contains-as-member ∈";
@@ -23,6 +22,9 @@ plan *;
     nok  $x  ∌  'a' , "!contains-as-member ∌";
 
 }
+
+
+
 
 =begin END
 
