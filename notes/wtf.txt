@@ -1,0 +1,19 @@
+*
+D7 : 215 = � => cartesian-product
+2208 : 8712 = ∈ => contains-as-member-R
+2209 : 8713 = ∉ => !contains-as-member-R
+220B : 8715 = ∋ => contains-as-member-L
+220C : 8716 = ∌ => !contains-as-member-L
+2216 : 8726 = ∖ => set-diff
+2219 : 8729 = ∙ => interpunct
+2229 : 8745 = ∩ => set-inter
+222A : 8746 = ∪ => set-union
+2282 : 8834 = ⊂ => subset-of
+2283 : 8835 = ⊃ => superset-of
+2284 : 8836 = ⊄ => !subset-of
+2285 : 8837 = ⊅ => !superset-of
+2286 : 8838 = ⊆ => subset-or-equal
+2287 : 8839 = ⊇ => superset-or-equal
+2288 : 8840 = ⊈ => !subset-or-equal
+2289 : 8841 = ⊉ => !superset-or-equal
+228E : 8846 = ⊎ => multiset-sum
