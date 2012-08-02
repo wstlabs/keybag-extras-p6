@@ -1,4 +1,6 @@
-*
+#
+# this file confuses vi.  what about github?
+#
 D7 : 215 = � => cartesian-product
 2208 : 8712 = ∈ => contains-as-member-R
 2209 : 8713 = ∉ => !contains-as-member-R
