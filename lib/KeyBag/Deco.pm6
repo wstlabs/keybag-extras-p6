@@ -1,25 +1,25 @@
 use v6;
-use KeyBag::Clone;
-use KeyBag::Cross;
-use KeyBag::Dist;
-use KeyBag::Rel;
-use KeyBag::Dot;
+use KeyBag::Role::Clone;
+use KeyBag::Role::Cross;
+use KeyBag::Role::Dist;
+use KeyBag::Role::Rel;
+use KeyBag::Role::Dot;
 
 #
-# a "decorated" KeyBag extension providing some functionality that is
+# A "decorated" KeyBag extension providing some functionality that is 
 # currently (2012.07) either un- or partially implemented in rakudo / niecza.
 #
-# note that our interface ends up being somewhat different, and in any
+# Note that our interface ends up being somewhat different, and in any
 # case will probably break once official implementations become available. 
 # but by then it will hopefully be obsolete, also.
 #
 class KeyBag::Deco
 is    KeyBag
-does  KeyBag::Clone
-does  KeyBag::Cross
-does  KeyBag::Dist
-does  KeyBag::Rel
-does  KeyBag::Dot {};
+does  KeyBag::Role::Clone
+does  KeyBag::Role::Cross
+does  KeyBag::Role::Dist
+does  KeyBag::Role::Rel
+does  KeyBag::Role::Dot {};
 
 multi sub infix:<∈>(   Any $a, KeyBag $x --> Bool) is export {  $x.exists($a) }
 multi sub infix:<∉>(   Any $a, KeyBag $x --> Bool) is export { !$x.exists($a) }

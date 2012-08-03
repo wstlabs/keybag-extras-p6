@@ -1,5 +1,12 @@
 use v6;
-role KeyBag::Rel  {
+
+#
+# in which we provide various set & multiset relations not provided
+# by the current (2012.05) version of rakudo, and only partially or 
+# buggily provided by niecza (apparently). 
+#
+
+role KeyBag::Role::Rel  {
 
     # XXX needs unit test
     multi method contains-or-equals (KeyBag $b --> Bool)  {
@@ -51,7 +58,7 @@ role KeyBag::Rel  {
             if ($b.exists($k))  {
                 self.at_key($k) = 
                     self.at_key($k) >= $b.at_key($k) ?? 
-                    self.at_key($k) -  $b.at_key($k) !!  0
+                    self.at_key($k) -  $b.at_key($k) !! 0
             }
         }
         return self
@@ -96,20 +103,23 @@ multi sub infix:<∈>(Any $a, KeyBag $x --> Bool) is export { $x.exists($a) }
 #
 #   http://www.alanwood.net/unicode/mathematical_operators.html
 #
-# this list appears to be comprehensive, but it does contain a few bugs -- 
-# notably, what it calls "multiset-union" (U+228E) should really be "multiset-diff".
+# This list appears to be comprehensive, but it does contain omissions, and 
+# occasional bugs -- notably, what it calls "multiset-union" (U+228E) should 
+# really be "multiset-diff". 
 #
-# there are also a few others, like "neither-subet-no-superset" which we're
+# There are also a few others, like "neither-subset-no-superset" which we're
 # just skipping, for the time being, but which we can always pull up later.
 #
-# a couple of other caveats:
+# A couple of other caveats:
 #
 #   - there is no "multiset-diff"; "set-diff" DWYM here. 
+#
 #   - we are using "large" element-of symbols defined in Wood's list; 
 #     there are also these "small" element-of symbols, but we're ignoring
 #     those.
 #
 
+XXX need cross op
 2208 : 8712 = ∈ =>  contains-as-member (R)
 2209 : 8713 = ∉ => !contains-as-member (R)
 220B : 8715 = ∋ =>  contains-as-member (L)

@@ -1,14 +1,13 @@
 use v6;
 BEGIN { @*INC.unshift: './lib' }
-use KeyBag::Dist;
+use KeyBag::Deco;
 use Test;
 plan *;
 
 {
     my $x;
     lives_ok { 
-        $x = KeyBag.new({ a => 2, b => 3 }) 
-            but KeyBag::Dist
+        $x = KeyBag::Deco.new({ a => 2, b => 3 })
     }, "valid inst";
     lives_ok { $x<c> = 1 }, "assign";
     is_deeply
@@ -22,11 +21,9 @@ plan *;
         # the only way we know at present to force the KB class to accept a 
         # "degenerate" set histo, which we need in order to exercise the
         # fail case below.
-        $y = KeyBag.new({ a => 2, b => 3, c => -1 }) 
-            but KeyBag::Dist
+        $y = KeyBag::Deco.new({ a => 2, b => 3, c => -1 }) 
     }, "degenerate inst";
-    dies_ok { my $dist = $y.dist }, "fail on dist()";
-
+    dies_ok { my $dist = $y.dist }, "expected fail on dist()";
 }
 
 
