@@ -1,13 +1,15 @@
 use v6;
 role KeyBag::Rel  {
 
+    # XXX needs unit test
     multi method contains-or-equals (KeyBag $b --> Bool)  {
         for $b.keys -> $k {
-            return False unless self.exists($k)
+            return False unless self.at_key($k) >= $b.at_key($k)
         }
         return True
     }
 
+    # XXX needs unit test
     multi method contains (KeyBag $b --> Bool)  {
         self.elems > $b.elems ?? 
             self.contains-or-equals($b) 
@@ -76,6 +78,7 @@ role KeyBag::Rel  {
     multi method sum            (Any $x)  { self.sum(            self.new($x) ) }
     multi method sum-in-place   (Any $x)  { self.sum-in-place(   self.new($x) ) }
 
+    # XXX would hash eqv be quicker?
     multi method equiv (KeyBag $b --> Bool)  {
         self.contains-or-equals($b)    &&
           $b.contains-or-equals(self)

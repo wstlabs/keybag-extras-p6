@@ -1,8 +1,9 @@
 use v6;
+use KeyBag::Clone;
+use KeyBag::Cross;
 use KeyBag::Dist;
 use KeyBag::Rel;
 use KeyBag::Dot;
-use KeyBag::Cross;
 
 #
 # a "decorated" KeyBag extension providing some functionality that is
@@ -14,9 +15,10 @@ use KeyBag::Cross;
 #
 class KeyBag::Deco
 is    KeyBag
+does  KeyBag::Clone
+does  KeyBag::Cross
 does  KeyBag::Dist
 does  KeyBag::Rel
-does  KeyBag::Cross
 does  KeyBag::Dot {};
 
 multi sub infix:<∈>(   Any $a, KeyBag $x --> Bool) is export {  $x.exists($a) }
