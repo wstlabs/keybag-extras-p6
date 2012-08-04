@@ -9,7 +9,7 @@ sub test_div (%h, %g, $n)  {
     my $g = keybag(%g);
     # say "h = ", $h;
     # say "g = ", $g;
-    ok $h eqv $g.div($n), "{$h.perl} = {$g.perl} / $n";
+    ok $h eqv $g / $n, "{$h.perl} = {$g.perl} / $n";
 }
 
 test_div { r => 1 }, { r => 2 }, 2 ;

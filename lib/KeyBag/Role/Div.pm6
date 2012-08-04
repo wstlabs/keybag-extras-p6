@@ -5,7 +5,7 @@ use v6;
 #
 role KeyBag::Role::Div  {
     multi method div ()  { Nil }
-    multi method div ($n)  {
+    multi method div (Int $n)  {
         self.new(
             hash
             map -> $k, $v {
