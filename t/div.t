@@ -6,10 +6,10 @@ plan *;
 
 sub test_div (%h, %g, $n)  {
     my $h = keybag(%h);
-    my $g = keybag(%g).div($n);
+    my $g = keybag(%g);
     say "h = ", $h;
     say "g = ", $g;
-    ok $h eqv $g, "$h = $g / $n";
+    ok $h eqv $g.div($n), "{$h.perl} = {$g.perl} / $n";
 }
 
 test_div 
@@ -17,8 +17,5 @@ test_div
     { r => 2 },
     2
 ;
-
-
-# test_div ( "r", "r2", 2 );
 
 

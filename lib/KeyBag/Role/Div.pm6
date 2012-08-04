@@ -10,7 +10,7 @@ role KeyBag::Role::Div  {
         self.new(
             hash
             map -> $k, $v {
-                $k => $v / $n
+                $k => ($v / $n).Int
             }, self.hash.kv
         ) 
     }
