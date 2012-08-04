@@ -1,6 +1,6 @@
 use v6;
 
-class X::KeyBag::Dist::Negative::Count 
+class X::KeyBag::Role::Dist::Negative::Count 
 is    Exception {
     has $.k;
     has $.v;

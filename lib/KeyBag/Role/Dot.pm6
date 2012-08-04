@@ -11,7 +11,6 @@ role KeyBag::Role::Dot  {
             %u{$k} ?? $v * %u{$k} !! () 
         }, self.hash.kv
     }
-
 }
 
 =begin END
