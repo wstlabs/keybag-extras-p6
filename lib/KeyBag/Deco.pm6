@@ -47,7 +47,7 @@ multi sub infix:<⊎> (KeyBag $x,    Any $y --> KeyBag) is export {  $x.sum($y) 
 multi sub infix:<eqv> (KeyBag $x, KeyBag $y --> Bool) is export {  $x.equiv($y) }
 multi sub infix:<∙>   (KeyBag $x, Any $y)             is export {  $x.dot($y) }       # dot product
 multi sub infix:<×>   (KeyBag $x, KeyBag $y)          is export {  $x.cross($y) }     # cartesian product
-multi sub infix:</>   (KeyBag $x, Int $n)             is export {  $x.div($n) }       # scalar div
+multi sub infix:</>   (KeyBag $x, Any $n)             is export {  $x.div($n) }       # scalar div
 
 # finally some ugly, but servicable in-place operators
 multi sub infix:<∖=> (KeyBag $x, Any $y --> KeyBag) is export {  $x.minus-in-place($y) }
