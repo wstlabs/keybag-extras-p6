@@ -2,6 +2,8 @@ use v6;
 use X::KeyBag::Role::Dist;
 
 #
+# XXX deprecated - just use / instead!
+#
 # an extremely simple role which provdies a probability distribution corresponding 
 # to the integer-valued histogram that the multiset object represents.  
 #

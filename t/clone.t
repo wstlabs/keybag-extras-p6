@@ -2,6 +2,7 @@ use v6;
 BEGIN { @*INC.unshift: './lib'; }
 use Test;
 use KeyBag::Deco; 
+use KeyBag::Ops;
 plan *;
 
 {

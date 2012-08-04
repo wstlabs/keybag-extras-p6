@@ -1,7 +1,6 @@
 use v6;
 use KeyBag::Role::Clone;
 use KeyBag::Role::Cross;
-use KeyBag::Role::Dist;
 use KeyBag::Role::Rel;
 use KeyBag::Role::Div;
 use KeyBag::Role::Dot;
@@ -19,10 +18,15 @@ class KeyBag::Deco
 is    KeyBag
 does  KeyBag::Role::Clone
 does  KeyBag::Role::Cross
-does  KeyBag::Role::Dist
 does  KeyBag::Role::Rel
 does  KeyBag::Role::Div
 does  KeyBag::Role::Dot {};
+
+sub keybag(*@a) is export {
+    KeyBag::Deco.new(|@a);
+}
+
+=begin END
 
 multi sub infix:<∈>(   Any $a, KeyBag $x --> Bool) is export {  $x.exists($a) }
 multi sub infix:<∉>(   Any $a, KeyBag $x --> Bool) is export { !$x.exists($a) }
@@ -53,9 +57,6 @@ multi sub infix:</>   (KeyBag $x, Any $n)             is export {  $x.div($n) } 
 multi sub infix:<∖=> (KeyBag $x, Any $y --> KeyBag) is export {  $x.minus-in-place($y) }
 multi sub infix:<⊎=> (KeyBag $x, Any $y --> KeyBag) is export {  $x.sum-in-place($y) }
 
-sub keybag(*@a) is export {
-    KeyBag::Deco.new(|@a);
-}
 
 =begin END
 
