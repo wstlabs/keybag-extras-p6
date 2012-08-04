@@ -65,6 +65,8 @@ role KeyBag::Role::Rel  {
     }
 
     multi method sum (KeyBag $b --> KeyBag)  {
+        say ".sum self = ", self.Str(), " => ", self.WHICH;
+        say ".sum b    = ", $b.Str(),   " => ", $b.WHICH;
         self.new(
             hash map -> $k {
                 $k => self.at_key($k) + $b.at_key($k)
