@@ -33,6 +33,16 @@ role KeyBag::Role::Rel  {
         )
     }
 
+    multi method inter (KeySet $s --> KeyBag)  {
+        self.new(
+            hash map -> $k {
+                $s.at_key($k) ??
+                    $k => self.at_key($k)
+                !! ()
+            }, self.keys
+        )
+    }
+
     multi method union (KeyBag $b --> KeyBag)  {
         self.new(
             hash map -> $k {
@@ -40,6 +50,12 @@ role KeyBag::Role::Rel  {
             }, Set.new(self.keys,$b.keys)
         )
     }
+
+    # XXX - NYI for now, but equivalent to an identity operation. 
+    # multi method union (KeySet $s --> KeyBag)  { }
+
+
+
 
     multi method minus (KeyBag $b --> KeyBag)  {
         self.new(
