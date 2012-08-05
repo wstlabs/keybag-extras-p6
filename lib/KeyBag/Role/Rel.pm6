@@ -65,8 +65,6 @@ role KeyBag::Role::Rel  {
     }
 
     multi method sum (KeyBag $b --> KeyBag)  {
-        say ".sum self = ", self.Str(), " => ", self.WHICH;
-        say ".sum b    = ", $b.Str(),   " => ", $b.WHICH;
         self.new(
             hash map -> $k {
                 $k => self.at_key($k) + $b.at_key($k)
@@ -162,4 +160,26 @@ multi sub infix:<≼>(Baggy $a, Baggy $b --> Bool) { so all $a.keys.map({ $a{$_}
 proto sub infix:<≽>($, $ --> Bool) is equiv(&infix:<==>) {*}
 multi sub infix:<≽>(Baggy $a, Baggy $b --> Bool) { so all $b.keys.map({ $b{$_} <= $a{$_} }) }
 
+
+    multi method sum (KeyBag $b --> KeyBag)  {
+        # say ".sum self = ", self.WHICH, " => ", self.Str(), " = ", self;
+        # say ".sum b    = ", $b.WHICH,   " => ", $b.Str(),   " = ", $b;
+        # my $z = 
+        self.new(
+            hash map -> $k {
+                $k => self.at_key($k) + $b.at_key($k)
+            }, Set.new(self.keys,$b.keys)
+        )
+        # ;
+        # say ".sum z    = ", $z.WHICH,   " => ", $z.Str(),   " = ", $z;
+        # return $z;
+    }
+
+    multi method sum            (Any $x)  { 
+        # say ".sum Any x    = ", $x.WHICH,   " => ", $x.Str(),   " = ", $x;
+        # my $y = self.new($x);
+        # say ".sum  => y    = ", $y.WHICH,   " => ", $y.Str(),   " = ", $y;
+        # return self.sum($y);
+        self.sum(            self.new($x) ) 
+    }
 
