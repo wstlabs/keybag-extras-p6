@@ -1,10 +1,7 @@
 use v6;
 
 #
-# ugh.  being as 'GLOBAL::infix' isn't supported, 
-# currently we don't see how else to shove these lovely operators into the
-# global namespace, other than putting them into a little side module to be
-#  included separately. 
+# alternate implementations of the various unicode operators for the KeyBag class. 
 #
 
 multi sub infix:<∈>(   Any $a, KeyBag $x --> Bool) is export {  $x.exists($a) }
@@ -27,6 +24,7 @@ multi sub infix:<∪> (KeyBag $x, KeyBag $y --> KeyBag) is export {  $x.union($y
 multi sub infix:<∖> (KeyBag $x,    Any $y --> KeyBag) is export {  $x.minus($y) }
 multi sub infix:<⊎> (KeyBag $x,    Any $y --> KeyBag) is export {  $x.sum($y) }
 
+# non-standard ops
 multi sub infix:<eqv> (KeyBag $x, KeyBag $y --> Bool) is export {  $x.equiv($y) }
 multi sub infix:<∙>   (KeyBag $x,    Any $y)          is export {  $x.dot($y) }       # dot product
 multi sub infix:<×>   (KeyBag $x, KeyBag $y)          is export {  $x.cross($y) }     # cartesian product
