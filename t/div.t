@@ -8,8 +8,6 @@ plan *;
 sub test_div (%h, %g, $n)  {
     my $h = keybag(%h);
     my $g = keybag(%g);
-    # say "h = ", $h;
-    # say "g = ", $g;
     ok $h eqv $g / $n, "{$h.perl} = {$g.perl} / $n";
 }
 

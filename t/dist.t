@@ -18,11 +18,11 @@ plan *;
 
     my $y;
     lives_ok { 
-        # XXX this construction only survives due to a lack of thorough 
-        # arg checking in the current (2012.05) rakudo impl.  but it's also 
-        # the only way we know at present to force the KB class to accept a 
-        # "degenerate" set histo, which we need in order to exercise the
-        # fail case below.
+        # XXX this use case -- where we manage to stuff a negative key height
+        # through the constructor -- only survives due to an apparent bug in the
+        # current (2012.05) rakudo impl.  but it's also the only way we know at 
+        # present to force the KB class to accept a "degenerate" set histo, 
+        # which we need in order to exercise the fail case below.
         $y = KeyBag::Deco.new({ a => 2, b => 3, c => -1 }) 
             but KeyBag::Role::Dist;
     }, "degenerate inst";

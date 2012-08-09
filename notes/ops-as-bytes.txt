@@ -1,5 +1,5 @@
 #
-# this file seems to be fine for vi and github.
+# a partial list of unicode ops, which looks fine in both vi and github.
 #
 00D7 : 0215 = × => cartesian-product
 2208 : 8712 = ∈ => contains-as-member-R
