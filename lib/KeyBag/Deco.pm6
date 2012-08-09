@@ -60,8 +60,6 @@ multi sub infix:<⊎=> (KeyBag $x, Any $y --> KeyBag) is export {  $x.sum-in-pla
 
 =begin END
 
-multi sub infix:<> 
-
 #
 # reference list of set ops, derived largely from
 #
@@ -99,29 +97,4 @@ multi sub infix:<>
 2288 : 8840 = ⊈ => !is-subset-or-equal
 2289 : 8841 = ⊉ => !is-superset-or-equal
 228E : 8846 = ⊎ =>  multiset-sum
-
-#
-# paste from lib/CORE.setting in niecza, for inspirational purposes only. 
-#
-multi sub infix:<∩>(Baggy $a, Any $b --> Bag) { $a ∩ bag($b) }
-multi sub infix:<∩>(Any $a, Baggy $b --> Bag) { bag($a) ∩ $b }
-multi sub infix:<∩>(Baggy $a, Baggy $b --> Bag) { bag((set($a) ∪ set($b)).map({ ; $_ => $a{$_} min $b{$_} })) }
-
-proto sub infix:<⊍>($, $ --> Bag) is equiv(&infix:<X>) {*}
-multi sub infix:<⊍>(Any $a, Any $b --> Bag) { bag($a) ⊍ bag($b) }
-multi sub infix:<⊍>(Bag $a, Bag $b --> Bag) { bag((set($a) ∪ set($b)).map({ ; $_ => $a{$_} * $b{$_} })) }
-only  sub infix:<(.)>($a, $b --> Bag) is equiv(&infix:<X>) { $a ⊍ $b }
-
-proto sub infix:<⊎>($, $ --> Bag) is equiv(&infix:<X>) {*}
-multi sub infix:<⊎>(Any $a, Any $b --> Bag) { bag($a) ⊎ bag($b) }
-multi sub infix:<⊎>(Bag $a, Bag $b --> Bag) { bag((set($a) ∪ set($b)).map({ ; $_ => $a{$_} + $b{$_} })) }
-only  sub infix:<(+)>($a, $b --> Bag) is equiv(&infix:<X>) { $a ⊎ $b }
-
-proto sub infix:<≼>($, $ --> Bool) is equiv(&infix:<==>) {*}
-multi sub infix:<≼>(Baggy $a, Baggy $b --> Bool) { so all $a.keys.map({ $a{$_} <= $b{$_} }) }
-
-proto sub infix:<≽>($, $ --> Bool) is equiv(&infix:<==>) {*}
-multi sub infix:<≽>(Baggy $a, Baggy $b --> Bool) { so all $b.keys.map({ $b{$_} <= $a{$_} }) }
-
-
 
