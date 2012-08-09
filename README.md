@@ -4,7 +4,7 @@ A "KeyBag", btw, basically corresponds to the what computer scientists would cal
 
   https://en.wikipedia.org/wiki/Multiset
 
-And the Perl 6 specification is given (or at least loosely sketched) in Synoopsis 32:
+And the Perl 6 specification is described in Synopsis 32:
   
   http://perlcabal.org/syn/S32/Containers.html
 
