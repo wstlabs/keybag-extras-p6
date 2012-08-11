@@ -1,6 +1,7 @@
 use v6;
 use KeyBag::Role::Clone;
 use KeyBag::Role::Cross;
+use KeyBag::Role::Slice;
 use KeyBag::Role::Rel;
 use KeyBag::Role::Div;
 use KeyBag::Role::Dot;
@@ -18,6 +19,7 @@ class KeyBag::Deco
 is    KeyBag
 does  KeyBag::Role::Clone
 does  KeyBag::Role::Cross
+does  KeyBag::Role::Slice
 does  KeyBag::Role::Rel
 does  KeyBag::Role::Div
 does  KeyBag::Role::Dot {};
