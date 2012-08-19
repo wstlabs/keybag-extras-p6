@@ -1,7 +1,16 @@
 use v6;
 
 #
-# alternate implementations of the various unicode operators for the KeyBag class. 
+# Alternate implementations of the various unicode operators for the 
+# core KeyBag class. 
+#
+# We include these in a separate module, which also has to be required 
+# separately in order to use these ops in your code (for the time being).
+#
+# This is in part out of prudence (we don't want to go scribbling in
+# the global namespace inadvertently), and in part out of ignorance
+# (we don't yet understand the exporting mechanisms of Perl 6 enough 
+# to push these out in a cleaner fashion).
 #
 
 multi sub infix:<∈>(   Any $a, KeyBag $x --> Bool) is export {  $x.exists($a) }
